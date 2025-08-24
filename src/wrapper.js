@@ -14,7 +14,7 @@ function accessibleAutocomplete (options) {
 
 const createSimpleEngine = (values) => (query, syncResults) => {
   const fuseOptions = new Fuse(values, { includeScore: true })
-  const matches = fuseOptions.search(query).filter(d => d.score < 0.1).map(d => d.item)
+  const matches = fuseOptions.search(query).filter(d => d.score < 0.2).map(d => d.item)
   // console.log(matches)
   // const matches = values.filter(r => r.toLowerCase().indexOf(query.toLowerCase()) !== -1)
   syncResults(matches)
