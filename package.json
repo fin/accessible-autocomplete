@@ -89,5 +89,8 @@
       "dist"
     ],
     "parser": "@babel/eslint-parser"
+  },
+  "dependencies": {
+    "fuse.js": "^7.1.0"
   }
 }

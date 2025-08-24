@@ -1,5 +1,6 @@
 import { createElement, render } from 'preact' /** @jsx createElement */
 import Autocomplete from './autocomplete'
+import Fuse from 'fuse.js'
 
 function accessibleAutocomplete (options) {
   if (!options.element) { throw new Error('element is not defined') }
@@ -12,7 +13,10 @@ function accessibleAutocomplete (options) {
 }
 
 const createSimpleEngine = (values) => (query, syncResults) => {
-  const matches = values.filter(r => r.toLowerCase().indexOf(query.toLowerCase()) !== -1)
+  const fuseOptions = new Fuse(values, { includeScore: true })
+  const matches = fuseOptions.search(query).filter(d => d.score < 0.1).map(d => d.item)
+  // console.log(matches)
+  // const matches = values.filter(r => r.toLowerCase().indexOf(query.toLowerCase()) !== -1)
   syncResults(matches)
 }
 
